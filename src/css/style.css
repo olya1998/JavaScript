@@ -1,0 +1,37 @@
+.about_me {
+    background-color: #87CEFA;
+    height: 400px;
+}
+h1{
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 60px;
+    text-align: center;
+    color: #ffa501;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 60px;
+    text-align: center;
+    color: #ffa501;
+}
+
+.divider {
+    width: 500px;
+    height: 0px;
+    border: 1px solid #005BBB;
+    margin: 0 auto;
+    margin-top: 16px;
+}
+
+p {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 40px;
+    color: #005BBB;
+    text-align: center;
+}
