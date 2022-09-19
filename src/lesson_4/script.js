@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 let sum = 0.1 + 0.2;
+=======
+const sum = 0.1 + 0.2;
+>>>>>>> lesson_5
 console.log( sum.toFixed(2) );
 
 const userLogin = prompt("укажите свой логин");
@@ -7,6 +11,7 @@ console.log("userLogin =", userLogin );
 const userPassword = prompt("введіть свій пароль?");
 console.log("userPassword =", userPassword );
 
+<<<<<<< HEAD
 if(userLogin != 'admin' && userPassword != '12pass33210') {
     console.log('You are not welcome here!');
 
@@ -15,6 +20,16 @@ if(userLogin != 'admin' && userPassword != '12pass33210') {
 
 } else {
     console.log('You are In  ADMIN MASTER');
+=======
+if(userLogin !== 'admin' && userPassword !== '12pass33210') {
+    console.log('You are not welcome here!');
+
+} else if( userLogin !== 'admin' || userPassword !== '12pass33210') {
+    console.log('Your login or password is incorrect');
+
+} else {
+    console.log('You are In ADMIN MASTER');
+>>>>>>> lesson_5
 
 }
 
@@ -31,7 +46,11 @@ const userSelect  = prompt("Що ви хочете придбати?");
 console.log("userSelect   =", userSelect  );
 
 
+<<<<<<< HEAD
 let price ;
+=======
+let price;
+>>>>>>> lesson_5
 let quantity;
 let rest;
 
@@ -61,7 +80,11 @@ switch (userSelect) {
 
     break;
   default:
+<<<<<<< HEAD
     console.log(`Please write correct prodct name`);
+=======
+    console.log(`Please write correct prodrct name`);
+>>>>>>> lesson_5
 }
 
 if (quantity > 0) {
