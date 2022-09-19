@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let myName = 'Olha';
 console.log(myName);
 
@@ -32,13 +31,6 @@ console.log(perimeter);
 
 
 
-
-
-
-
-
-
-=======
 const MyName = 'Olya';
 console.log("MyName =", MyName );
 
@@ -47,4 +39,4 @@ console.log("mySurmame, =", mySurmame);
 
 const myСity = 'Kharkiv';
 console.log("myСity, =", myСity);
->>>>>>> lesson_4
+

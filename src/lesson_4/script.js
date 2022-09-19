@@ -45,12 +45,7 @@ console.log(potatoes, watermelon, carrots, cucumbers);
 const userSelect  = prompt("Що ви хочете придбати?");
 console.log("userSelect   =", userSelect  );
 
-
-<<<<<<< HEAD
-let price ;
-=======
 let price;
->>>>>>> lesson_5
 let quantity;
 let rest;
 
@@ -80,11 +75,7 @@ switch (userSelect) {
 
     break;
   default:
-<<<<<<< HEAD
-    console.log(`Please write correct prodct name`);
-=======
     console.log(`Please write correct prodrct name`);
->>>>>>> lesson_5
 }
 
 if (quantity > 0) {
