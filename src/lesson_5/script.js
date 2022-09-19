@@ -82,4 +82,9 @@ console.log('позитивних: ' + plus);
 console.log('негативних: ' + minus);
 console.log('нулеів: ' + zero);
 console.log('парне: ' + even);
+<<<<<<< HEAD
 console.log('непарне: ' + odd);
+=======
+console.log('непарне: ' + odd);
+
+>>>>>>> lesson_6
