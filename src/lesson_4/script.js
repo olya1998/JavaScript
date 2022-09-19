@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-let sum = 0.1 + 0.2;
-=======
 const sum = 0.1 + 0.2;
->>>>>>> lesson_5
 console.log( sum.toFixed(2) );
 
 const userLogin = prompt("укажите свой логин");
@@ -11,7 +7,6 @@ console.log("userLogin =", userLogin );
 const userPassword = prompt("введіть свій пароль?");
 console.log("userPassword =", userPassword );
 
-<<<<<<< HEAD
 if(userLogin != 'admin' && userPassword != '12pass33210') {
     console.log('You are not welcome here!');
 
@@ -20,7 +15,9 @@ if(userLogin != 'admin' && userPassword != '12pass33210') {
 
 } else {
     console.log('You are In  ADMIN MASTER');
-=======
+}
+
+
 if(userLogin !== 'admin' && userPassword !== '12pass33210') {
     console.log('You are not welcome here!');
 
@@ -29,7 +26,6 @@ if(userLogin !== 'admin' && userPassword !== '12pass33210') {
 
 } else {
     console.log('You are In ADMIN MASTER');
->>>>>>> lesson_5
 
 }
 
