@@ -1,32 +1,29 @@
-//Написати функцію, яка приймає 4 аргументи і шукає найменше число серед них
+function minimum (a, b, c, d) {
+  if(! Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(c) || !Number.isInteger(d)) {
+      console.log('input parameters are invalid');
+      return;
+  }   
 
+  let minVal = a;
+  if (minVal > b) {
+    minVal = b;
+  } 
+    if (minVal > c) {
+    minVal = c;
+  } 
+    if (minVal > d) {
+    minVal = d;
+  }
 
-/*function minimum (a, b, c, d) {
- let minVal = a;
- if (minVal > b) {
-  minVal = b;
- } 
-  if (minVal > c) {
-  minVal = c;
- } 
-  if (minVal > d) {
-  minVal = d;
- }
-
- return minVal;
+  return minVal;
 } 
 
-const miniNumber = minimum(10, 5, -1, 12);
-
-console.log(miniNumber);
-*/
-
-
-
-// Написать функцию, которая принимает 2 аргумента и ищет наибольший общий делитель для них. Если такого числа нет, то сообщать об отсутствии
-
-
 function minDivider(m, n) {	
+   if(! Number.isInteger(m) || !Number.isInteger(n)) {
+      console.log('input parameters are invalid');
+      return;
+   }
+
   const min = m < n ? m : n;	
 
   for(let i = min; i >= 2; i--) {
@@ -39,37 +36,36 @@ function minDivider(m, n) {
   return  'no divider :( ';
 }
 
+function isPerfect(number) {
+  if(! Number.isInteger(number)) {
+    console.log('input parameter is invalid');
+    return;
+ }
 
-
-
-
-
-
-
-// Написати функцію, яка приймає 1 аргумент та перевіряє чи дане число ідеальне
-/*function thePerfect(number) {
-    let temp = 0;
-        for(var i=1;i<=number/2;i++)
-        {
-        if(number%i === 0)
-          {
-            temp += i;
-          }
-     }
+  let temp = 0;
+  for(let i = 1;i <= number / 2; i++) {
+  if(number % i === 0){
+      temp += i;
+    }
+  }
    
-     if(temp === number && temp !== 0)
-        {
-        console.log("The perfect number.");
-        }  
+  if(temp === number && temp !== 0){
+    return number + " is a perfect number.";
+  } else {
+    return "sorry, it is NOT a perfet number";
+  }
+  // TODO:: idialy this function should return Boolean
+  // following  S (single responsibility) form SOLID 
  } 
-thePerfect(28); 
-*/
 
-// Написать функцию, которая принимает 2 аргумента и рассчитывает сумму в этом промежутке. Обратите внимание, что можно передать 10 и (-2 в качестве аргументов. Сумму всех чисел в этом промежутке также следует вычислить
+function range (a, b) {
+  if(! Number.isInteger(a) || !Number.isInteger(b)) {
+      console.log('Не правільні параметри');
+      return;
+  }
 
-/*function range (a, b) {
-let min;
-let max;
+  let min;
+  let max;
   if (a == b) {
     return a;
   } else if (a > b) {
@@ -80,7 +76,6 @@ let max;
      max = b;
   }
 
-
   let rangeSum = 0;
   for (let i = min; i <= max; i++) {
     rangeSum += i;
@@ -89,37 +84,21 @@ let max;
   
 }
 
-const summa = range(10, -2);
+function cToF(celsius) {
+  if (! Number.isInteger(celsius)) {
+    console.log('Не правільний параметр');
+    return;
+  }
+  const fahrenheit = celsius * 9 / 5 + 32;
 
-console.log(summa);
-*/
-
-// console.log('summ on range is: ', range(10, -2)); 
-
-// range(10, -2);
-
-
-
-// Написати функцію, яка приймає та конвертує температуру із Цельсій у Фаренгейт
-/*function cToF(celsius) 
-{
-  const cTemp = celsius;
-  const cToFahr = cTemp * 9 / 5 + 32;
-   const message = cTemp + '\xB0C is ' + cToFahr + ' \xB0F.' ;
-    console.log(message);
+  return celsius + '\xB0C is ' + fahrenheit + ' \xB0F.' ;
 }
-cToF(60);
-*/
 
+function getRandomInt(min, max) {
+  if(! Number.isInteger(min) || !Number.isInteger(max)) {
+    console.log('Не правільні параметри');
+    return;
+ }
 
-// Написати фунцію, яка генерує випадкове ціле число в проміжку від 0 до 40
-
-
-
-/*function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-  
 }
-
-console.log('getRandomInt =', getRandomInt(0, 40));   
-*/
