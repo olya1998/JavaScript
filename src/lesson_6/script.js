@@ -1,5 +1,5 @@
 function minimum (a, b, c, d) {
-  if(! Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(c) || !Number.isInteger(d)) {
+  if(!Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(c) || !Number.isInteger(d)) {
       console.log('input parameters are invalid');
       return;
   }   
@@ -14,33 +14,10 @@ function minimum (a, b, c, d) {
     if (minVal > d) {
     minVal = d;
   }
-
-<<<<<<< HEAD
-// Написати функцію, яка приймає 2 аргументи та шукає найбільший спільний дільник для них. Якщо такого числа немає, то повідомляти про відсутність
-
-// Написати функцію, яка приймає 1 аргумент та перевіряє чи дане число ідеальне
-//function thePerfect(number) {
-
-/*function minimum (a, b, c, d) {
- let minVal = a;
- if (minVal > b) {
-  minVal = b;
- } 
-  if (minVal > c) {
-  minVal = c;
- } 
-  if (minVal > d) {
-  minVal = d;
- }
-
- return minVal;
-=======
-  return minVal;
->>>>>>> lesson_6
-} 
+}
 
 function minDivider(m, n) {	
-   if(! Number.isInteger(m) || !Number.isInteger(n)) {
+   if(!Number.isInteger(m) || !Number.isInteger(n)) {
       console.log('input parameters are invalid');
       return;
    }
@@ -58,33 +35,18 @@ function minDivider(m, n) {
 }
 
 function isPerfect(number) {
-  if(! Number.isInteger(number)) {
+  if(!Number.isInteger(number)) {
     console.log('input parameter is invalid');
     return;
  }
 
-<<<<<<< HEAD
-
-
-// Написати функцію, яка приймає 1 аргумент та перевіряє чи дане число ідеальне
-/*function thePerfect(number) {
-    let temp = 0;
-        for(var i=1;i<=number/2;i++)
-        {
-        if(number%i === 0)
-          {
-            temp += i;
-          }
-     }
-=======
   let temp = 0;
   for(let i = 1;i <= number / 2; i++) {
   if(number % i === 0){
       temp += i;
     }
   }
->>>>>>> lesson_6
-   
+
   if(temp === number && temp !== 0){
     return number + " is a perfect number.";
   } else {
@@ -93,27 +55,9 @@ function isPerfect(number) {
   // TODO:: idialy this function should return Boolean
   // following  S (single responsibility) form SOLID 
  } 
-<<<<<<< HEAD
-thePerfect(28); 
-*/
-// Написати функцію, яка приймає 2 аргументи та обраховує суму в цьому проміжку. Зверніть увагу, що можна передати 10 та -2, як аргументи. Суму всіх чисел в цьому проміжку також треба обчислити
-
-// Написати функцію, яка приймає та конвертує температуру із Цельсій у Фаренгейт
-function cToF(celsius) 
-{
-  var cTemp = celsius;
-  var cToFahr = cTemp * 9 / 5 + 32;
-   var message = cTemp + '\xB0C is ' + cToFahr + ' \xB0F.' ;
-    console.log(message);
-}
-cToF(60);
-
-
-=======
->>>>>>> lesson_6
 
 function range (a, b) {
-  if(! Number.isInteger(a) || !Number.isInteger(b)) {
+  if(!Number.isInteger(a) || !Number.isInteger(b)) {
       console.log('Не правільні параметри');
       return;
   }
@@ -154,28 +98,5 @@ function getRandomInt(min, max) {
     return;
  }
 
-<<<<<<< HEAD
-// Написати фунцію, яка генерує випадкове ціле число в проміжку від 0 до 40
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; 
-    
-}
-
-getRandomInt(0, 40);
-
-
-
-/*function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-  
-}
-
-console.log('getRandomInt =', getRandomInt(0, 40));   
-*/
-=======
   return Math.floor(Math.random() * (max - min)) + min;
 }
->>>>>>> lesson_6
