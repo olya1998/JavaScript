@@ -7,7 +7,6 @@
 // чи водій допущений до автопробігу булевое
 
 
-function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed) {
 
     // var booleanValue = true; 
     // var numericalValue = 354;
@@ -17,6 +16,9 @@ function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed
     // alert(typeof numericalValue) // displays "number"
     // alert(typeof stringValue) // displays "string"
     // alert(typeof stringObject) // displays "object"
+
+
+/*function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed) {
 
     if(typeof teamName !== 'string' || teamName.length < 3
         || typeof driverName !== 'string' || driverName.length < 5
@@ -41,18 +43,48 @@ function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed
 
  
 
-// Запитати у користувача дані (через prompt та циклічно), про нового користувача у системі та зберегти його в об'єкт. Дані про користувача - логін, пароль, місто, країна, стать, вік
+// Запитати у користувача дані (через prompt та циклічно), про нового користувача у системі та зберегти його в об'єкт. Дані про користувача -
+//  логін, 
+//  пароль,
+//   місто, 
+//   країна,
+//    стать, 
+//    вік
 
-/*const bert = prompt("Напишите свой логин, пароль, город");
-console.log('your dsta =', bert)
+// for (let key in my_math) {
+//     console.log(`${key} = ${my_math[key]}`); //
+//   }
 
-const userData = {
+
+function userData () {
+    const user = {
+        login: null,
+        password: null,
+        city: null,
+        country: null,
+        gender: null,
+        age: null,
+    }
     
-}
-console.log(userData);
+    let value;
+    for (let key in user) {
+        value = prompt('enter your ' + key);
 
-userData = bert;
-*/
+        if(typeof value === 'string' && value.length > 0){
+            if(key === 'age') {
+                value = Number(value);
+            }
+            user[key] = value;
+        } 
+
+    }
+
+    return user;
+
+}
+
+
+
 
 
     
