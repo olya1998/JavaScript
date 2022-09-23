@@ -17,9 +17,7 @@
     // alert(typeof stringValue) // displays "string"
     // alert(typeof stringObject) // displays "object"
 
-
-/*function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed) {
-
+function carMileage(teamName, driverName, year, carBrand, teamSponsor, isAllowed) {
     if(typeof teamName !== 'string' || teamName.length < 3
         || typeof driverName !== 'string' || driverName.length < 5
         || typeof year !== 'number' ||  year < 1987
@@ -65,8 +63,8 @@ function userData () {
         gender: null,
         age: null,
     }
-    
     let value;
+
     for (let key in user) {
         value = prompt('enter your ' + key);
 
@@ -76,28 +74,38 @@ function userData () {
             }
             user[key] = value;
         } 
-
     }
 
     return user;
+}
 
+
+
+// Створити функцію, яка буде міняти дані в конкретного користувача. Наприклад сhangeUserData(user_1, city, 'Kherson). Де user_1 - обʼєкт в якому буде мінятись, city - поле, як буде мінятися на нове значення поля city - 'Kherson'
+
+function сhangeUserData (user, property, value) {
+
+    if(typeof user == 'object' && user !== null && user.hasOwnProperty(property) 
+    && ((property !== 'age' && typeof value === 'string' && value.length > 0) 
+        || (property === 'age' &&  typeof value === 'number'))
+    ){
+        user[property] = value;
+        return user;
+    } else {
+        console.log(` The Property is not valid in the object`);
+    }
 }
 
 
 
 
 
-    
-
-
-
-// Створити функцію, яка буде міняти дані в конкретного користувача. Наприклад сhangeUserData(user_1, city, 'Kherson). Де user_1 - обʼєкт в якому буде мінятись, city - поле, як буде мінятися на нове значення поля city - 'Kherson'
 
 // Створити об'єкт cтудента - name, surname, age, course, city, greeting, addHomework.  +
 // greetin - метод, котрий виводить повідомлення через console.log('Hi. everyone!'). addHomework - метод, котрий виводить повідомлення через console.log('Sending my howework... Please, wait') ???
 
 
-/*const student = {
+const student = {
     name: "Olya",
     surname: "Semenenko",
     age: 24,
@@ -109,7 +117,7 @@ function userData () {
 console.log(student); 
 console.log(student ["greeting"]); 
 console.log(student ["addHomework"]); 
-*/
+
 
 
 
