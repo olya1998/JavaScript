@@ -119,13 +119,14 @@ function getMostExpensive(shoppingList)
 
 
 // - Створити функцію, яка повинна додавати новий продукт в існуючий масив
+// - Дані про новий продукт - користувач вводить із prompt
 
 function addItem(shoppingList) {
     // любимая валидация) love))))
 
     // проверить что массив 
     if(Array.isArray(shoppingList)) {
-        let isError = false;
+        let isError = false;  // ?????
         let productName = prompt('Введіть назву продукта'); // после этого
         let productPrice = Number(prompt('Введіть ціну продукта'));// после этого
         let productQuantity = Number(prompt('Введіть кількість продукту'));// после этого
@@ -146,24 +147,40 @@ function addItem(shoppingList) {
 
     } else {
         console.log('Input param is not an Array');
+    } 
+}
+
+// - Створити функцію, яка повинна видаляти конкретний продукт із існуючий масиву продуктів
+function deleteItem(shoppingList) {
+    if(! Array.isArray(shoppingList) || shoppingList.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
     }
 
 
-   
+    // спросить у пользователя название продукта - по которому удалять объект 
+    const deleteProduct = prompt('Введіть назву продукта, який хочете видалити');
+     
+    // Найти элемент в массиве - нужен индекс 
+    for (var i = 0; i <= shoppingList.length; i++) {
+    
+        if (shoppingList[i].productName == deleteProduct) {
+            
+            shoppingList.splice(i, 1);
+            
+            return shoppingList;
+        }
+    }
+    
+    console.log("Product Not Found");
 }
-
-
-
-// - Дані про новий продукт - користувач вводить із prompt
-
-// - Створити функцію, яка повинна видаляти конкретний продукт із існуючий масиву продуктів
 
 // - Дані про видалення такого продукту - користувач вводить із prompt лише назву
 
 
 
 //4. Дано масив [16, -3, 54,-4, 72,-56, 47, -12, 4, -16, 25, -37, 46, 4, -51, 27, -8, 4, -54, 76, -4, 12, 6, -35]
-
+const newNumbers = [16, -3, 54,-4, 72,-56, 47, -12, 4, -16, 25, -37, 46, 4, -51, 27, -8, 4, -54, 76, -4, 12, 6, -35];
 
 //- Знайти суму та кількість позитивних елементів.
 
