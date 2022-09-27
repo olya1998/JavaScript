@@ -1,7 +1,5 @@
 // 1. Створити масив, довжину та елементи якого задає користувач (через prompt).
 
-
-
 function arrayCreate () {
     const arrayLength = Number(prompt('яка довжина масива?'));
     if(arrayLength > 0) {
@@ -11,61 +9,52 @@ function arrayCreate () {
             // спросить у пользователя - что поместить в этот элемент
             element = prompt('what should be inside this element?');
             // добавить что он ввел в массив 
-            newArray.push(element);
-            
-        }      
+            newArray.push(element);   
+        }
         return newArray;
     } else {
         console.log('wrong parameter :(');
     }
-
 }
-
-
 
 // 2. Відсортувати масив за зростанням.??
 const someNumbers = [4, 5, 10, -3, 9, 1, 24];
 someNumbers.sort(function(num_1, num_2) {
-    return num_1 - num_2
-});
-
-
-
-
+    return num_1 - num_2;
+})
 
 // 3. Дано масив - список покупок. Кожен елемент масиву - це обʼєкт вигляду: {productName: 'bread', productPrice: 14.5, productQuantity: 2}. Мінімальний довжина такого масиву - 6 
 const shoppingList = [
     {
-        productName: 'bread', 
-        productPrice: 14.5, 
-        productQuantity: 2   
+        productName: 'bread',
+        productPrice: 14.5,
+        productQuantity: 2
     },
     {
-        productName: 'milk', 
-        productPrice: 25, 
-        productQuantity: 2   
+        productName: 'milk',
+        productPrice: 25,
+        productQuantity: 2
     },
     {
-        productName: 'cucumber', 
-        productPrice: 7, 
-        productQuantity: 25  
+        productName: 'cucumber',
+        productPrice: 7,
+        productQuantity: 25
     },
     {
-        productName: 'oil', 
-        productPrice: 32, 
-        productQuantity: 4  
+        productName: 'oil',
+        productPrice: 32,
+        productQuantity: 4
     },
     {
-        productName: 'salt', 
-        productPrice: 13, 
-        productQuantity: 8 
+        productName: 'salt',
+        productPrice: 13,
+        productQuantity: 8
     },
     {
-        productName: 'meat', 
-        productPrice: 92.8, 
-        productQuantity: 1  
+        productName: 'meat',
+        productPrice: 92.8,
+        productQuantity: 1
     },
-
 ];
 
 // - Порахувати загальну вартість корзини та вивести суму у зрозумілому форматі
@@ -90,7 +79,6 @@ function getMinQuantity(shoppingList)
         return min;
     }
 }
-
 
 // - Порахувати загальну кількість продуктів
 const numberProducts = shoppingList.reduce(function(prev, cur) {
@@ -180,18 +168,131 @@ function deleteItem(shoppingList) {
 
 
 //4. Дано масив [16, -3, 54,-4, 72,-56, 47, -12, 4, -16, 25, -37, 46, 4, -51, 27, -8, 4, -54, 76, -4, 12, 6, -35]
-const newNumbers = [16, -3, 54,-4, 72,-56, 47, -12, 4, -16, 25, -37, 46, 4, -51, 27, -8, 4, -54, 76, -4, 12, 6, -35];
+const newNumbers = [16, -3, 54,-4, 72, -56, 47, -12, 4, -16, 25, -37, 46, 4, -51, 27, -8, 4, -54, 76, -4, 12, 6, -35];
 
-//- Знайти суму та кількість позитивних елементів.
+
+//- Знайти суму та кількість? позитивних елементів. ??
+function getPositives (newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+
+    let positive = 0;
+    const result = newNumbers.reduce(function(sum, elem) {
+    if (elem >= 0) {
+        positive++;
+        return sum + elem;
+    } else {
+        return sum;
+    }
+});
+    return {
+        positiveSum: result,
+        positiveCount: positive
+    };
+}
+
+
 
 //- Знайти мінімальний елемент масиву та його порядковий номер.
+function getMinimum (newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+
+    const min =  Math.min(...newNumbers);
+    const index = newNumbers.indexOf(min);
+
+    return {
+        minNumber: min,
+        minIndex: index
+    };
+
+}
+
 
 //- Знайти максимальний елемент масиву та його порядковий номер.
+function getMaximum (newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+    
+    const max =  Math.max(...newNumbers);
+    const index = newNumbers.indexOf(max);
+
+    return {
+        maxNumber: max,
+        maxIndex: index
+    };
+
+}
 
 //- Визначити кількість негативних елементів.
+function getNegative(newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+
+    const negative = newNumbers.filter(function (value) {
+        return value < 0;
+    });
+
+    return negative.length;
+}
+
+
 
 //- Знайти кількість непарних позитивних елементів.
+function getOddCount(newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
 
+    const positive = newNumbers.filter(function (FedorPupkin) {
+        return  FedorPupkin > 0 && FedorPupkin % 2 !== 0;
+    });
+
+    return positive.length;
+}
 //- Знайти суму парних позитивних елементів.
+function getEvenSum(newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+
+    const positive = newNumbers.filter(function (FedorPupkin) {
+        return  FedorPupkin > 0 && FedorPupkin % 2 === 0;
+    })
+    
+
+    const sum = positive.reduce(function(sum, e) {
+        return sum + e;
+    }, 0)
+
+    return sum;
+}
+    
 
 //- Знайти добуток позитивних елементів.
+function  multiplyPositiveNumbers(newNumbers) {
+    if(! Array.isArray(newNumbers) || newNumbers.length <= 0 ) {
+        console.log('Input param is not an Array Or Empty');
+        return;
+    }
+
+    const positive = newNumbers.filter(function (FedorPupkin) {
+        return  FedorPupkin > 0;
+    })
+    
+    const sum = positive.reduce(function(sum, e) {
+        return sum * e;
+    });
+
+    return sum;
+}
