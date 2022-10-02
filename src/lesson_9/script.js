@@ -1,0 +1,87 @@
+// 1.Создать функцию-конструктор Человека. Свойства, которые будут описывать экземпляр Человека – имя, возраст, пол, национальность, страна, список стран для путешествий.
+// Создать универсальные функции – знакомство, просыпаться, засыпать и список стран, которые Человек хочет посетить. Работу этих функций можно выводить через console.log. Но в каждой из функций должно использоваться как можно больше характеристик конкретного Человека, на котором эта функция вызывается (подсказка: здесь нужно использовать call/apply/bind)
+
+function CreateHuman(name, age, gender, nationality, country, travelList, timeOn = 8, timeOff = 22) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.nationality = nationality;
+    this.country = country;
+    this.travelList = travelList;
+    this.timeOn = timeOn;
+    this.timeOff = timeOff;
+}
+
+const Feman = new CreateHuman('Olya', 24, 'female', 'Ukranian', 'Ukraine', ['Spain', 'Egypt', 'Israel']);
+const Man = new CreateHuman('Oleh', 25, 'female', 'Ukranian', 'Ukraine', ['Spain', 'Egypt', 'Israel'], 10, 24);
+
+
+const greeting = function (name, age, country) {
+    console.log(`My name is ${this.name}, I am ${this.age} years old, I'm from ${this.country}`);
+    console.log(`Ah and my name is ${name}, I am ${age} years old, I'm from ${country}`);
+} 
+
+const getUp = function (name, timeOn) {
+  console.log(`Wake Up dear ${this.name}, it is ${timeOn} already`);
+  console.log(`Oh, thanks ${name}, I'm usually wake up at ${this.timeOn}, but today is is different`);
+}
+
+
+
+getUp.apply(Feman, ['OleHH',7]);
+getUp.apply(Man, ['Ivan',9]);
+// greeting.apply(Feman, ['Petia', 15, 'USA']);
+// greeting.call(Man, 'Adam', 35, 'Ukraine');
+
+//--
+
+
+//--------------
+
+// const greet = function (param1, param2, param3) {
+//     console.log(this.name, this.age);
+//     console.log(param1, param2, param3);
+//   };
+  
+//   const me = {
+//     name: 'Ros',
+//     age: 28,
+//   };
+  
+//   const me2 = {
+//     name: 'Oleh',
+//     age: 30,
+//   };
+  
+//   const me3 = {
+//     name: 'Roman',
+//     age: 27,
+//   };
+  
+
+  
+
+  
+  //greet.apply(me, [10, 20, 30]);
+  //greet.apply(me2, [100, 99, 101]);
+  //greet.apply(me3, ['smth', true, {}]);
+  
+  //greet.call(me, 10, 20, 50);
+  //greet.call(me2, 'sfsd', true, {});
+  // const callRes = greet.call(me3, true, true, null); // undefined
+  
+  // const bound = greet.bind(me3, -10, -20, -30);
+  
+
+
+
+
+// 2.Создать собственную реализацию метода .bind (подсказка: в конце надо поместить эту собственную функцию в прототип - Function.prototype.myOwnBind = function() { [здесь_код_кастомного_bind] }
+
+// 3.Cоздать функцию, принимающую 2 параметра – объекты. Функция должна проверять, абсолютно ли эти 2 объекта идентичны и возвращает результат в понятном формате.
+
+// 4.Создайте функцию-конструктор Calculator, создающий объекты с тремя методами:
+// - enterData – запрашивает два значения с помощью prompt и запоминает их в свойствах объекта.
+// - calculateSum() возвращает сумму этих свойств.
+// - calculateNSD() возвращает результат поиска НДД
+// - calculateNSK() возвращает результат поиска НСК
