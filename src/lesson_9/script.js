@@ -123,19 +123,44 @@ function MyStudent(name, age, course, speciality, city) {
   this.name = name;
   this.age = age;
   this.course = course;
-  this.speciality = speciality;// где? 
+  this.speciality = speciality;// где?
   this.city = city;
 }
 
 const student= new MyStudent('Olya', 24, 6, 'doctor', 'Kharkiv');
 
-const info = function () {
+// const info = function (city) {
+//   console.log(`My name is ${this.name}, I am ${this.age} years old, I'm stading for the ${this.course} to the ${this.speciality}, in the town ${city}`);
+// } 
+
+// const bound = info.bind(student, 'Kharkiv');
+//bound()
+
+MyStudent.prototype.myOwnBind = function() {   
   console.log(`My name is ${this.name}, I am ${this.age} years old, I'm stading for the ${this.course} to the ${this.speciality}, in the town ${this.city}`);
-} 
+}
+//  получается этого не хватает, делаем по примеру из урока тогда 
 
-const bound = info.bind(student);
-bound()
+function megaGreeting(name, age = 24, course = 6, speciality = 'doctor', city = 'Kharkiv') {
+  // ...
+ // MyStudent.bind(this, name);
+  MyStudent.call(this, name, age, course, speciality, city);
+//   Сделать Баннд  - посмотреть как правильно задавать параметры, тут или уже при вызове на месте 
+}
 
+megaGreeting.prototype = Object.create(MyStudent.prototype);
+
+const testStudent = new megaGreeting('Alex');
+
+const nextStudent = new megaGreeting('Peter', 21, 3, 'developer');
+
+
+//const newBound = student.myOwnBind();  
+//newBound();
+
+ testStudent.myOwnBind();
+
+nextStudent.myOwnBind();
 
 
 
