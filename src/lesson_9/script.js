@@ -117,62 +117,120 @@ const bound = info.bind(myStudent, Olya);
 bound();
 */
 
-// 2.
+// 2. Function.prototype.myOwnBind = function () { [тут_код_кастомного_bind] }
 
-function MyStudent(name, age, course, speciality, city) {
-  this.name = name;
-  this.age = age;
-  this.course = course;
-  this.speciality = speciality;// где?
-  this.city = city;
+const person = {
+  name: 'Olga'
 }
 
-const student= new MyStudent('Olya', 24, 6, 'doctor', 'Kharkiv');
-
-// const info = function (city) {
-//   console.log(`My name is ${this.name}, I am ${this.age} years old, I'm stading for the ${this.course} to the ${this.speciality}, in the town ${city}`);
-// } 
-
-// const bound = info.bind(student, 'Kharkiv');
-//bound()
-
-MyStudent.prototype.myOwnBind = function() {   
-  console.log(`My name is ${this.name}, I am ${this.age} years old, I'm stading for the ${this.course} to the ${this.speciality}, in the town ${this.city}`);
-}
-//  получается этого не хватает, делаем по примеру из урока тогда 
-
-function megaGreeting(name, age = 24, course = 6, speciality = 'doctor', city = 'Kharkiv') {
-  // ...
- // MyStudent.bind(this, name);
-  MyStudent.call(this, name, age, course, speciality, city);
-//   Сделать Баннд  - посмотреть как правильно задавать параметры, тут или уже при вызове на месте 
+function info(phone, email) {
+  console.log(`  name: ${this.name}, phone: ${phone}, email: ${email}`);
 }
 
-megaGreeting.prototype = Object.create(MyStudent.prototype);
+//Demo
+// info.bind(person)('1234567', 'e@m.com');
+// info.bind(person, '123456')('e@m.com');
+// info.bind(person, '12345678', 'e@m.com')(); // !!
 
-const testStudent = new megaGreeting('Alex');
+// function bind(funct, context, ...rest) {
+//   return funct.bind(context, ...rest);
+// }
 
-const nextStudent = new megaGreeting('Peter', 21, 3, 'developer');
+// function bind(func, context, ...rest) {
+//   return function( ...args) {
+//     const uniqId = Date.now().toString();
+//     context[uniqId] = func;
+//     const result = context[uniqId](...rest.concat(args));
+//     delete context[uniqId]
+
+//     return result;
+//   }
+// }
+const MyBind = function(context, ...rest) {
+  return function(...args) {
+    console.log('my ' + context.name +' params are: ' + rest.concat(args).join(', and '));
+  }
+}
+
+Function.prototype.myBestBind = MyBind;
 
 
-//const newBound = student.myOwnBind();  
-//newBound();
 
- testStudent.myOwnBind();
+// прояснить !
+//Cat.prototype = Object.create(Function.prototype)
 
-nextStudent.myOwnBind();
+
+info.myBestBind(person)('1234567', 'e@m.com');
+// myBestBind(info, person, '123456')('e@m.com');
+// myBestBind(info, person, '12345678', 'e@m.com')(); 
 
 
 
 // 3.Cоздать функцию, принимающую 2 параметра – объекты. Функция должна проверять, абсолютно ли эти 2 объекта идентичны и возвращает результат в понятном формате.
 
-// function myParameters(name, age) {
-//   name = 'Olya';
-//   age = 24; 
-// };
+
+const firstObj = {
+  name: 'Olya',
+  age: 25,
+};
+const secondObj = {
+  name: 'Olya',
+  age: 24,
+};
+
+ function myParameters(obkectOne, objectTwo) {
+  // валидация сто первый и второй параметры -объекты
 
 
+  return isEqual = JSON.stringify(obkectOne) === JSON.stringify(objectTwo);
+ }
 
+console.log(myParameters(firstObj, secondObj));
+
+
+ const first = {
+     name: 'Olya',
+     age: 24
+ };
+
+ const second = {
+     name: 'Olya',
+     age: 24
+ };
+
+ for (let key in first) {
+   console.log(first[key]);
+ }
+
+ for (let key in second) {
+   console.log(second[key]);
+ }
+
+
+//  function userData () {
+//   const user = {
+//       login: null,
+//       password: null,
+//       city: null,
+//       country: null,
+//       gender: null,
+//       age: null,
+//   };
+//   let value;
+
+//   for (let key in user) {
+//       value = prompt('enter your' + key);
+
+//       if(typeof value === 'string' && value.length > 0){
+//           if(key === 'age') {
+//               value = Number(value);
+//           }
+//           user[key] = value;
+//       }
+//   }
+
+//   return user;
+// }
 
 // 4.Создайте функцию-конструктор Calculator, создающий объекты с тремя методами:
 // - enterData – запрашивает два значения с помощью prompt и запоминает их в свойствах объекта.
@@ -180,16 +238,50 @@ nextStudent.myOwnBind();
 // - calculateNSD() возвращает результат поиска НДД
 // - calculateNSK() возвращает результат поиска НСК
 
+
 // function Calculator() {
-//   this.enterData = function () {
-//     this.value = +prompt('value?');
-//   };
+//   this.enterData = enterData;
+//   this.calculateSum = calculateSum; 
+//   this.calculateNSD = calculateNSD;
+//   this.calculateNSK = calculateNSK;
+//  }
+
+// // const calculator = new Calculator() {
+// // }
+
+// function enterData() {
+//   const first = +prompt('Напишіть перше значення');
+//   const second = +prompt('Напишіть друге значення');
+//   this.a = first;
+//   this.b = second;
 // }
+/*
+function Calculator() {
 
+  this.enterData = function() {
+    this.firstNumber = +prompt('Напишіть перше значення');
+    this.secondNumber = +prompt('Напишіть друге значення');
+  };
 
+  this.calculateSum = function() {
+    return this.firstNumber + this.secondNumber;
+  };
 
+  this.calculateNSD = function() {
+    return this.firstNumber / this.secondNumber;
+  };
+  this.calculateNSK = function() {
+    return this.firstNumber * this.secondNumber;
+  };
+}
+// числа 5 и 18 NSD=1, NSK=90;
+let calculator = new Calculator();
+calculator.enterData();
 
-// this.enterData = enterData;
-// this.calculateSum = calculateSum; 
-// this.calculateNSD = calculateNSD;
-// this.calculateNSK = calculateNSK;
+// enterData.apply(calculator);
+// calculator.calculateSum();
+
+console.log( "calculateSum=" + calculator.calculateSum() );
+console.log( "calculateNSD=" + calculator.calculateNSD());
+console.log( "calculateNSK=" + calculator.calculateNSK());
+*/
