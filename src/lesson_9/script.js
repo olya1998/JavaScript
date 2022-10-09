@@ -63,9 +63,6 @@ Function.prototype.myBestBind = MyBind;
 
 info.myBestBind(person)('8094152392', 'olbga99@.com');
 
-// 3.Cоздать функцию, принимающую 2 параметра – объекты. Функция должна проверять, абсолютно ли эти 2 объекта идентичны и возвращает результат в понятном формате.
-
-
 const firstObj = {
   name: 'Olya',
   age: 24,
