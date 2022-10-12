@@ -1,7 +1,9 @@
 // Homework 10
 
+const OPERABILITY = 100;
+
 // Реалізувати фунцію-конструктор Автомобіля.
-function Car(startTripe, finishTripe, expenditure, engineType, engineVolume, model, year, weight, operability = 100) {
+function Car(startTripe, finishTripe, expenditure, engineType, engineVolume, model, year, weight, operability = OPERABILITY) {
     this.startTripe = startTripe;
     this.finishTripe =  finishTripe;
     this.expenditure  = expenditure;
@@ -216,27 +218,68 @@ function getPrices() {
 
 
 // Створити функцію Дилер, яка приймає 1 аргумент - створений пунктом вище автомобіль (з його даними)
-function autoDiler(car) {
+function autoDiler(car, name) {
     if(typeof car === 'object' && car instanceof Car) {
         //Функція Дилер визначає скільки коштуватиме ремонт машини відштовхуючись від прейскуранту цін наведених у таблиці
         const constructorName = car.constructor.name; //из параметра вытаскиваю его имя конструкторв
-        const prices = getPrices();
+        
+        
+        //FIXME!!!!! поменять на нормлаьнее решение вывода названия у "прототипа"
+        const prices = getPrices()[name];
 
-        //TODO::  выяснить как дстать имя конструктора правильно !
-
-
-        console.log(constructorName);
-
-
+        let koef = 0;
         
 
+        //рассчёт коеф для года
+    for(i = 1; i >= prices.year.length; i++) {
+        console.log('235 str ' + prices.year[i].factor);
+        if(car.year >= prices.year[i].min && car.year <= prices.year[i].max ) {
+            koef += prices.year[i].factor;
+        }
+    }
 
-        
-        // TODO::  сделать расчёт. отдульную функцию (потом решим)
+    console.log('240 str ' + koef);
 
-        return prices;
+    //рассчёт коеф для массы
+    for(i = 1; i >= prices.mass.length; i++) {
+        if(car.mass >= prices.mass[i].min && car.mass <= prices.mass[i].max ) {
+            koef += prices.mass[i].factor;
+        }
+    }
+
+    console.log('250 str ' + koef);
+
+    // рассчёт коеф для типа двигателя
+    koef += prices.type[car.engineType];
+
+
+    console.log('240 str ' + koef);
+
+    if(koef <= 0) {
+        console.log('Sorry, your can in unreapairable :)');
+        return;
+    }
+
+    const pricePerUnit =  Number((prices.price * koef).toFixed(2));
+
+    const damage = Number((OPERABILITY - car.operability).toFixed(1));
+
+    const TotalPrice =  Number((damage * pricePerUnit).toFixed(2));
+
+    console.log(`damage: ${damage}, PricePerUnit: ${pricePerUnit},  koef: ${koef}`);
+
+
+    console.log(`Fixing you car will take ${TotalPrice} USD`);
+
+
+
+
+
+    return TotalPrice;
         
     }
+    console.log('Validation error');
+    return false;
 }
 //console.log(autoDiler(hatchback)['Hatchback']);
 
