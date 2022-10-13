@@ -77,7 +77,7 @@ Universal.prototype = Object.create(Car.prototype);
 const hatchback = new Hatchback(7, 'petrol', 1596,  'ford focus', 2017, 1270);
 const sedan = new Sedan(7, 'petrol', 1596, 'ford focus', 2021, 1300);
 const universal = new Universal(7, 'petrol', 1596,  'ford focus', 2008, 1300);
-// Створити кілька автомоблів, поїздити. Переконатись, що кожна поїздка справді впливає на справність авто // это тут 
+// Створити кілька автомоблів, поїздити. Переконатись, що кожна поїздка справді впливає на справність авто 
 function testDrive(car, sets) {
     for(let i = 1; i <= sets; i++) {
         car.start();
@@ -231,51 +231,44 @@ function autoDiler(car, name) {
         
 
         //рассчёт коеф для года
-    for(i = 1; i >= prices.year.length; i++) {
-        console.log('235 str ' + prices.year[i].factor);
-        if(car.year >= prices.year[i].min && car.year <= prices.year[i].max ) {
-            koef += prices.year[i].factor;
+        for(i = 0; i < prices.year.length; i++) {
+            if(car.year >= prices.year[i].min && car.year <= prices.year[i].max ) {
+                koef += prices.year[i].factor;
+            }
         }
-    }
 
-    console.log('240 str ' + koef);
-
-    //рассчёт коеф для массы
-    for(i = 1; i >= prices.mass.length; i++) {
-        if(car.mass >= prices.mass[i].min && car.mass <= prices.mass[i].max ) {
-            koef += prices.mass[i].factor;
+        //рассчёт коеф для массы
+        for(i = 0; i < prices.mass.length; i++) {
+            if(car.weight >= prices.mass[i].min && car.weight <= prices.mass[i].max ) {
+                koef += prices.mass[i].factor;
+            }
         }
-    }
 
-    console.log('250 str ' + koef);
+        // рассчёт коеф для типа двигателя
+        koef += prices.type[car.engineType];
 
-    // рассчёт коеф для типа двигателя
-    koef += prices.type[car.engineType];
+        console.log('240 str ' + koef);
 
+        if(koef <= 0) {
+            console.log('Sorry, your can in unreapairable :)');
+            return;
+        }
 
-    console.log('240 str ' + koef);
+        // тут цена за каждый 0.1 урона 
+        const pricePerUnit =  Number((prices.price * koef).toFixed(2));
 
-    if(koef <= 0) {
-        console.log('Sorry, your can in unreapairable :)');
-        return;
-    }
+        // тут общий урон для авто 100 минус то, что наломали в процессе поездок
+        const damage = Number((OPERABILITY - car.operability).toFixed(1));
 
-    const pricePerUnit =  Number((prices.price * koef).toFixed(2));
+        // тут итоговая цена ремонта Урон * цену_за_01_урона
+        const totalPrice =  Number((damage * pricePerUnit).toFixed(2));
 
-    const damage = Number((OPERABILITY - car.operability).toFixed(1));
+        console.log(`Your car damage is ${damage}, fixing you car will cost ${totalPrice} USD`);
 
-    const TotalPrice =  Number((damage * pricePerUnit).toFixed(2));
-
-    console.log(`damage: ${damage}, PricePerUnit: ${pricePerUnit},  koef: ${koef}`);
-
-
-    console.log(`Fixing you car will take ${TotalPrice} USD`);
-
-
-
-
-
-    return TotalPrice;
+        return {
+            damage: damage,
+            totalPrice: totalPrice
+        };
         
     }
     console.log('Validation error');
