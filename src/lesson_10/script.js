@@ -1,8 +1,5 @@
-// Homework 10
-
 const OPERABILITY = 100;
 
-// Реалізувати фунцію-конструктор Автомобіля.
 function Car(startTripe, finishTripe, expenditure, engineType, engineVolume, model, year, weight, operability = OPERABILITY) {
     this.startTripe = startTripe;
     this.finishTripe =  finishTripe;
@@ -13,24 +10,20 @@ function Car(startTripe, finishTripe, expenditure, engineType, engineVolume, mod
     this.year = year;
     this.weight = weight;
     this.operability = operability;
-    this.isOnTheWay = false; // by default - can can be used = free
+    this.isOnTheWay = false;
 }
 
 Car.prototype.start = function () {
-    // проверить что машина не занята 
+
     if(this.isOnTheWay === false) {
-        //змінюють ці статуси у конкретного екземпляра
         this.isOnTheWay = true;
 
-
-        console.log('lets go')
+        console.log('lets go');
     } else {
-        console.log('sorry, I am busy')
+        console.log('sorry, I am busy');
     }
-   
-};
+}
 
-  
 Car.prototype.finish = function () {
    
     if(this.isOnTheWay === true) {
@@ -45,39 +38,31 @@ Car.prototype.finish = function () {
         const randomDamage = (Math.random() * (max - min) + min).toFixed(4);
 
         this.operability = +Number.parseFloat(this.operability - randomDamage).toFixed(2);
-        // Number.parseFloat(4 - 0.6).toFixed(2);
 
         console.log('stop');
     } else {
         console.log('Hmm, no problem:)');
     }
-};
-
-// Можливості автомобіля - почати поїздку, закінчити поїздку
-
-// Реалізувати 3 фунції-конструктори - Хетчбек, Універсал, Седан. Їхнім прототипом - має бути Автомобіль та його можливості відповідно
-
-// Окрім можливостей Автомобіля, ці 3 сутності повинні мати свої власні дані - розхід топлива, тип двигуна, об'єм двигуна, модель, рік випуску, маса, статус (або поїздка або готовий до поїздки) та справність авто
-
+}
 
 function Hatchback( expenditure, engineType, engineVolume, model, year, weight) {
-    Car.call(this, 'start', 'finish',  expenditure, engineType, engineVolume, model, year, weight)
+    Car.call(this, 'start', 'finish',  expenditure, engineType, engineVolume, model, year, weight);
 }
 function Sedan(expenditure, engineType, engineVolume, model, year, weight) {
-    Car.call(this, 'start', 'finish', expenditure, engineType, engineVolume, model, year, weight)
-} 
+    Car.call(this, 'start', 'finish', expenditure, engineType, engineVolume, model, year, weight);
+}
 function Universal(expenditure, engineType, engineVolume, model, year, weight) {
-    Car.call(this, 'start', 'finish', expenditure, engineType, engineVolume, model, year, weight,)
-} 
+    Car.call(this, 'start', 'finish', expenditure, engineType, engineVolume, model, year, weight);
+}
 
 Hatchback.prototype = Object.create(Car.prototype);
 Sedan.prototype = Object.create(Car.prototype);
 Universal.prototype = Object.create(Car.prototype);
 
-const hatchback = new Hatchback(7, 'petrol', 1596,  'ford focus', 2017, 1270);
+const hatchback = new Hatchback(7, 'petrol', 1596, 'ford focus', 2017, 1270);
 const sedan = new Sedan(7, 'petrol', 1596, 'ford focus', 2021, 1300);
-const universal = new Universal(7, 'petrol', 1596,  'ford focus', 2008, 1300);
-// Створити кілька автомоблів, поїздити. Переконатись, що кожна поїздка справді впливає на справність авто 
+const universal = new Universal(7, 'petrol', 1596, 'ford focus', 2008, 1300);
+
 function testDrive(car, sets) {
     for(let i = 1; i <= sets; i++) {
         car.start();
@@ -216,8 +201,6 @@ function getPrices() {
     };
 }
 
-
-// Створити функцію Дилер, яка приймає 1 аргумент - створений пунктом вище автомобіль (з його даними)
 function autoDiler(car) {
     if(typeof car === 'object' && car instanceof Car) {
         if(car.operability >= 100 && car.operability <= 0) {
@@ -237,37 +220,30 @@ function autoDiler(car) {
 
         let koef = 0;
         
-
-        //рассчёт коеф для года
         for(i = 0; i < prices.year.length; i++) {
-            if(car.year >= prices.year[i].min && car.year <= prices.year[i].max ) {
+            if(car.year >= prices.year[i].min && car.year <= prices.year[i].max) {
                 koef += prices.year[i].factor;
             }
         }
 
-        //рассчёт коеф для массы
         for(i = 0; i < prices.mass.length; i++) {
-            if(car.weight >= prices.mass[i].min && car.weight <= prices.mass[i].max ) {
+            if(car.weight >= prices.mass[i].min && car.weight <= prices.mass[i].max) {
                 koef += prices.mass[i].factor;
             }
         }
 
-        // рассчёт коеф для типа двигателя
         koef += prices.type[car.engineType];
 
         if(koef <= 0) {
-            console.log('Sorry, your can in unreapairable :)');
+            console.log('Sorry, your can in unreapairable:)');
             return;
         }
 
-        // тут цена за каждый 0.1 урона 
-        const pricePerUnit =  Number((prices.price * koef).toFixed(2));
+        const pricePerUnit = Number((prices.price * koef).toFixed(2));
 
-        // тут общий урон для авто 100 минус то, что наломали в процессе поездок
         const damage = Number((OPERABILITY - car.operability).toFixed(1));
 
-        // тут итоговая цена ремонта Урон * цену_за_01_урона
-        const totalPrice =  Number((damage * pricePerUnit).toFixed(2));
+        const totalPrice = Number((damage * pricePerUnit).toFixed(2));
 
         console.log(`Your car damage is ${damage}, fixing you car will cost ${totalPrice} USD`);
 
@@ -275,34 +251,7 @@ function autoDiler(car) {
             damage: damage,
             totalPrice: totalPrice
         };
-        
     }
     console.log('Validation error');
     return false;
 }
-//console.log(autoDiler(hatchback)['Hatchback']);
-
-// console.log(hatchback);
-// console.log(universal);
-// console.log(sedan);
-
-
-
-
-// Статус авто - не можна почати нову поїздку не завершивши попередню. Статус має бути Boolean значенням. Де true - це Автомобіль зараз у поїздці. Та false - Автомобіль стоїть, можна починати нову поїздку (+)
-
-// Відповідно методи Автомобіля почати та закінчити поїздку змінюють ці статуси у конкретного екземпляра (+) - но нужно проверить и протестировать !!!
-
-// Справність авто - це число від 0-100. Від кожної поїздки на авто (викликаний методом почати поїздку) - справність зменшується (+)
-
-// Кількість такої справності, яка зменшується визначати через Math.random. Випадкове число має бути в межах від 0.1 до 2.5 (+)
-
-// Створити кілька автомоблів, поїздити. Переконатись, що кожна поїздка справді впливає на справність авто  (+) 
-// -----------------------------
-
-
-// Створити функцію Дилер, яка приймає 1 аргумент - створений пунктом вище автомобіль (з його даними)
-
-// Функція Дилер визначає скільки коштуватиме ремонт машини відштовхуючись від прейскуранту цін наведених у таблиці
-
-// Дилер після ремонту має оновити справність конкретного авто до 100 та повідомити власнику ціну ремонту
