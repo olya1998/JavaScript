@@ -103,7 +103,7 @@ function getPrices() {
                     factor: 1.7
                 },
                 {   min: 1990,
-                    max: 2008,
+                    max: 1999,
                     factor: 2.0
                 }
             ],
@@ -145,7 +145,7 @@ function getPrices() {
                     factor: 2.0
                 },
                 {   min: 1990,
-                    max: 2008,
+                    max: 1999,
                     factor: 2.6
                 }
             ],
@@ -187,7 +187,7 @@ function getPrices() {
                     factor: 2.5
                 },
                 {   min: 1990,
-                    max: 2008,
+                    max: 1999,
                     factor: 3.0
                 }
             ],
@@ -218,14 +218,22 @@ function getPrices() {
 
 
 // Створити функцію Дилер, яка приймає 1 аргумент - створений пунктом вище автомобіль (з його даними)
-function autoDiler(car, name) {
+function autoDiler(car) {
     if(typeof car === 'object' && car instanceof Car) {
-        //Функція Дилер визначає скільки коштуватиме ремонт машини відштовхуючись від прейскуранту цін наведених у таблиці
-        const constructorName = car.constructor.name; //из параметра вытаскиваю его имя конструкторв
+        if(car.operability >= 100 && car.operability <= 0) {
+            console.log('Your can not be repaired, please contact your manager', car.operability);
+            return;
+        } 
+        let instanceName;
+        if(sedan instanceof Sedan) {
+            instanceName = 'Sedan';
+        } else if (sedan instanceof Hatchback) {
+            instanceName = 'Hatchback';
+        } else if (sedan instanceof Universal) {
+            instanceName = 'Universal';
+        }        
         
-        
-        //FIXME!!!!! поменять на нормлаьнее решение вывода названия у "прототипа"
-        const prices = getPrices()[name];
+        const prices = getPrices()[instanceName];
 
         let koef = 0;
         
@@ -246,8 +254,6 @@ function autoDiler(car, name) {
 
         // рассчёт коеф для типа двигателя
         koef += prices.type[car.engineType];
-
-        console.log('240 str ' + koef);
 
         if(koef <= 0) {
             console.log('Sorry, your can in unreapairable :)');
