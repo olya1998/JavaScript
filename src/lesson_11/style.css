@@ -1,12 +1,51 @@
 li {
-    
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
     list-style: none;
 }
 
 li:nth-child(odd) {
-    background-color: silver;
+    background-color: #87CEFA;;
 }
 
 li:nth-child(even) {
-    background-color: lightyellow;
+    background-color: #ffff00;
+}
+
+.fa-exclamation {
+    font-size: 25px;
+    color: red;
+}
+
+.date {
+    background-color: #dcdcdc;
+    font-size: 15px;
+}
+
+.provider {
+    font-size: 20px;
+    text-decoration: underline;
+    text-decoration-color: #00bfff;
+}
+
+.summary {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    color: #0000ff;
+}
+
+.avg {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    color: #008000;
+}
+
+.max {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    color: #ff0000;
 }
