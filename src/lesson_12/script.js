@@ -1,18 +1,6 @@
-// Створити калькулятор, як приклад у прикріпленому відео
-
-// Не обов'язково ідеально повинен бути той самий дизайн, стилі, ефекти, тощо. Головне - функіонал. Стилі та ефекти - на власний смак та розсуд
-
-// Функціонал повинен бути зрозумілим та робочим
-
-// Кнопки % та +/- НЕ ПОТРІБНО додавати
-
-
-// Ділення на 0 або інші математично не правильні операції - закінчуватись повідомленням - Not a number, або Error: Invalid operation
-
-// Кнопка АС - затирає вміст на екрані вводу
-
+// Calculator
 const btn = document.getElementById('buttons');
-// вот это можно в функцию закинуть - будем переиспользовать
+
 let a;
 let operation;
 let b;
@@ -30,7 +18,6 @@ function setResultValue(value) {
 }
 
 function calculateResult(a, b, operation) {
-    // as soon using eval() - is NOT safe - I'm using such approach
     const formula = `return ${+a} ${operation} ${+b}`;
 
     const F = new Function (formula);
@@ -40,10 +27,9 @@ function calculateResult(a, b, operation) {
     return typeof result === 'number' ? result : 0;
 }
 
-
 reset();
 
- btn.addEventListener('click', function (event) {
+btn.addEventListener('click', function (event) {
      const input = event.target.textContent;
      const classList = event.target.classList;
 
@@ -53,14 +39,12 @@ reset();
         if(typeof +input === 'number') {
             if(operation === null ) { 
                 a = (a === null) ? input : (a + input);
+                setResultValue(a);
             } else  if(a !== null && operation !== null) {
                 b = (b === null) ? input : (b + input);
-
+                setResultValue(b);
             } 
-            setResultValue(a);
-
         }
-
     } else if (classList.contains('operation') || classList.contains('equal')) {
         if(a !== null) {
             if(b !== null && operation !== null) { 
@@ -76,36 +60,27 @@ reset();
             }
             if(! classList.contains('equal')) {
                 operation = input;
-            }
-            
+            } 
         }
     }  
+}); 
 
+// ToDo List
+const input = document.getElementById('myInput');
+console.log(input);
 
+const btnAdd = document.getElementById("add");
+console.log(btnAdd);
 
-// 4)если операция и число заполнено - Переменную А приводим к Числу 
-// 5)если следующий ввод - операция - меняем переменную  Operation
-// 6)если после переменной А и Operation вводим число - набираем переменную B 
-// 7)если следующий ввод - Операция - вначале выполням формулу(считаем и результат запиываем в переменную А) и продолжаем с пункта 5
+const ul = document.createElement('ul');
+document.body.append(ul);
 
-// если просто Равно - считаем как в шаге 7, и ждём операцию, если на вводе число - тогда перезаписываем переменную А
-// если AC просто всё в null 
+btnAdd.addEventListener('click', (e) => {
+    const li = document.createElement('li');
+    li.innerHTML = input.value;
+    ul.append(li);
 
+    input.value = '';
+});
 
-
-
- }); 
-
- 
-
-
- 
-
-
-
-// Створити ToDo List, як на прикладі у прикліпленому відео
-
-// Кожен елемент - додається при кліку на кнопку
-
-// Стилі та ефекти - на власний смак та розсуl
 

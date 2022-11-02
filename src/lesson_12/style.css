@@ -25,6 +25,7 @@
     margin: 0;
     color: #ffd700;
 } 
+
 #buttons {
     display: grid;
     grid-template-areas: 
@@ -66,7 +67,6 @@
     border-radius: 30px;
 }
 
-
 .btn:hover {
     filter: brightness(120%)
 }
@@ -83,4 +83,63 @@
     background: #ffa500;
 } 
 
+/* todoList */
+body {
+    margin: 0;
+    min-width: 250px;
+}
 
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #F0F8FF;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.header {
+    background-color: #87CEFA;
+    padding: 30px 40px;
+    color: #4682B4;
+    text-align: center;
+}
+  
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+} 
+  
+input {
+    margin: 0;
+    border: none;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    background-color: #FFFFF0;
+}
+
+#add {
+    padding: 10px;
+    width: 25%;
+    background: #00BFFF;
+    color: #FFFF00;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
