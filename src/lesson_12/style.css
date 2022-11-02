@@ -2,11 +2,11 @@
     margin: 50px auto;
     width: 300px;
     height: 500px;
+    padding: 18px;
     border-radius: 30px;
     background: #778899;
     color: #dcdcdc;
     font-family: Arial;
-    padding: 18px;
     box-shadow: 4px 4px 4px #696969;
 }
 
@@ -24,29 +24,40 @@
     font-size: 50px;
     margin: 0;
     color: #ffd700;
-}
+} 
 #buttons {
     display: grid;
     grid-template-areas: 
-    "ac plus-minus percent division"
+    "ac ac division division"
     "seven eight nine multi"
-    "four five six  minus"
+    "four five six minus"
     "one two three plus"
     "zero zero dot equel";
     grid-gap: 10px;
-    justify-items: center;
+    justify-items: center; 
 }
 
 .btn {
     width: 60px;
     height: 60px;
+    font-size: 20px;
     background: #1e90ff;
     border-radius: 50%; 
     text-align: center;
-    line-height: 60px; 
-    font-size: 20px;
-    cursor: pointer;
+    line-height: 60px;
     user-select: none;
+}
+
+.btn.ac {
+    grid-area: ac;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.btn.division {
+    grid-area: division;
+    width: 100%;
+    border-radius: 30px;
 }
 
 .btn.zero {
@@ -54,6 +65,7 @@
     width: 100%;
     border-radius: 30px;
 }
+
 
 .btn:hover {
     filter: brightness(120%)
@@ -69,5 +81,6 @@
 
 .btn.orange {
     background: #ffa500;
-}
+} 
+
 
