@@ -67,10 +67,8 @@ btn.addEventListener('click', function (event) {
 
 // ToDo List
 const input = document.getElementById('myInput');
-console.log(input);
 
 const btnAdd = document.getElementById("add");
-console.log(btnAdd);
 
 const ul = document.createElement('ul');
 document.body.append(ul);
