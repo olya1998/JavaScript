@@ -57,20 +57,20 @@ function calculateDiff(inputDate) {
 
 const btnCampaign = document.querySelector("#start_campaign");
 btnCampaign.addEventListener('click', function() {
-    let inputeDate = document.querySelector('#start_date').value;
+    let inputDate = document.querySelector('#start_date').value;
 
     const deadlineTimer = document.getElementById('deadlineTimer');
 
-    inputeDate = new Date(inputeDate);
+    inputDate = new Date(inputDate);
 
-    deadlineTimer.innerHTML = calculateDiff(inputeDate);
+    deadlineTimer.innerHTML = calculateDiff(inputDate);
 
     const deadline = setInterval(function() {
 
-        deadlineTimer.innerHTML = calculateDiff(inputeDate);
+        deadlineTimer.innerHTML = calculateDiff(inputDate);
 
     }, 1000);  
-})
+});
 
 const phones = {
     iPhone: {
