@@ -3,17 +3,12 @@ const btnTimeout = document.querySelector('#start_timeout');
 
 const userSeconds = () => {
     alert('The End!'); 
-}
-
-
+};
 
 btnTimeout.addEventListener('click', function() { 
     const timer = setTimeout(userSeconds, input.value * 1000);
-
-    //setTimeout(() => { clearInterval(timer)}, (input + 1) * 1000); // это смутило
     input.value = '';
 });
-
 
 const date1 = new Date("7/11/2010");
 const date2 = new Date("12/12/2010");
