@@ -8,45 +8,53 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div>
-        <input type="text" id="start_seconds">
-        <button id="start_timeout">Start timeout</button>
+    
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Calculator -->
+    <div class="calc">
+        <div class="calc-screen">
+            <p id="result">0</p>
+        </div>
+        <div id="buttons">
+            <div class="btn ac grey">ac</div>
+            <div class="btn operation division grey">/</div>
+
+            <div class="btn seven number">7</div>
+            <div class="btn eight  number">8</div>
+            <div class="btn nine number">9</div>
+            <div class="btn operation multi orange">*</div>
+
+            <div class="btn four number">4</div>
+            <div class="btn five number">5</div>
+            <div class="btn six number">6</div>
+            <div class="btn operation minus orange">-</div>
+
+            <div class="btn one number">1</div>
+            <div class="btn two number">2</div>
+            <div class="btn three number">3</div>
+            <div class="btn operation plus orange">+</div>
+
+            <div class="btn zero number">0</div>
+            <div class="btn dot operation">,</div>
+            <div class="btn equal operation orange">=</div>
+        </div>
+    </div> 
+
+    <!-- ToDo List -->
+    <div id="myDIV" class="header">
+        <h2>To Do List</h2>
+        <input type="text" id="myInput" placeholder="What do you have to do?...">
+        <span id="add">Add</span>
     </div>
-
-    <div>
-        <input type="date" id="start_date">
-        <button id="start_campaign">Start Campaign</button>
-        <div id="deadlineTimer"></div>
-    </div>
-
-    <label for="brand">Choose a Brand:</label>
-    <select name="brand" id="brand">
-        <option value="iPhone">iPhone</option>
-        <option value="Samsung">Samsung</option>
-        <option value="Pixel">Pixel</option>
-        <option value="OnePlus">OnePlus</option>
-    </select>
-
-    <label for="ram">Choose a RAM:</label>
-    <select name="ram" id="ram">
-        <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="6">6</option>
-        <option value="8">8</option>
-    </select>
-
-    <label for="ssd">Choose a SSD:</label>
-    <select name="ssd" id="ssd">
-        <option value="64">64</option>
-        <option value="128">128</option>
-        <option value="256">256</option>
-        <option value="512">512</option>
-    </select>
-
-    <div id="totalPrice"></div>
-
-    <button id="calculateSum">Calculate</button>
-
+        
+    <ul id="result">
+        <li>Learn JS</li>
+        <li>Walk with my dog</li> 
+    </ul>
+         
     <script src="./script.js"></script>
 </body>
 </html>
