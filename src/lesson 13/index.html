@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div>
+        <input type="text" id="start_seconds">
+        <button id="start_timeout">Start timeout</button>
+    </div>
+
+    <div>
+        <input type="date" id="start_date">
+        <button id="start_campaign">Start Campaign</button>
+        <div id="deadlineTimer"></div>
+    </div>
+
+    <label for="brand">Choose a Brand:</label>
+    <select name="brand" id="brand">
+        <option value="iPhone">iPhone</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Pixel">Pixel</option>
+        <option value="OnePlus">OnePlus</option>
+    </select>
+
+    <label for="ram">Choose a RAM:</label>
+    <select name="ram" id="ram">
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+    </select>
+
+    <label for="ssd">Choose a SSD:</label>
+    <select name="ssd" id="ssd">
+        <option value="64">64</option>
+        <option value="128">128</option>
+        <option value="256">256</option>
+        <option value="512">512</option>
+    </select>
+
+    <div id="totalPrice"></div>
+
+    <button id="calculateSum">Calculate</button>
+
+    <script src="./script.js"></script>
+</body>
+</html>
