@@ -1,0 +1,145 @@
+.calc {
+    margin: 50px auto;
+    width: 300px;
+    height: 500px;
+    padding: 18px;
+    border-radius: 30px;
+    background: #778899;
+    color: #dcdcdc;
+    font-family: Arial;
+    box-shadow: 4px 4px 4px #696969;
+}
+
+.calc-screen {
+    height: 120px;
+    padding: 10px;
+    display: grid;  
+    justify-items: end;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+.calc-screen p {
+    text-align: right;
+    font-size: 50px;
+    margin: 0;
+    color: #ffd700;
+} 
+
+#buttons {
+    display: grid;
+    grid-template-areas: 
+    "ac ac division division"
+    "seven eight nine multi"
+    "four five six minus"
+    "one two three plus"
+    "zero zero dot equel";
+    grid-gap: 10px;
+    justify-items: center; 
+}
+
+.btn {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    background: #1e90ff;
+    border-radius: 50%; 
+    text-align: center;
+    line-height: 60px;
+    user-select: none;
+}
+
+.btn.ac {
+    grid-area: ac;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.btn.division {
+    grid-area: division;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.btn.zero {
+    grid-area: zero;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.btn:hover {
+    filter: brightness(120%)
+}
+
+.btn:active {
+    filter: brightness(90%)
+}
+
+.btn.grey {
+    background: #a9a9a9;
+}
+
+.btn.orange {
+    background: #ffa500;
+} 
+
+/* todoList */
+body {
+    margin: 0;
+    min-width: 250px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #F0F8FF;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.header {
+    background-color: #87CEFA;
+    padding: 30px 40px;
+    color: #4682B4;
+    text-align: center;
+}
+  
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+} 
+  
+input {
+    margin: 0;
+    border: none;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    background-color: #FFFFF0;
+}
+
+#add {
+    padding: 10px;
+    width: 25%;
+    background: #00BFFF;
+    color: #FFFF00;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
