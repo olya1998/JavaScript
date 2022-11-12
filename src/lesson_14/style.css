@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+}
+
+div {
+    margin: 50px;
+}
+
+#year {
+    font-size:15px;
+    font-weight:bold;
+    color:#1E90FF; 
+    width:  140px;
+}
+
+.result {
+    color:#6A5ACD;
+}
+
+input {
+    color:#1E90FF;
+}
+
+button {
+    background-color: #FFFF00;
+}
