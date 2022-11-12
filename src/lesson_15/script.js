@@ -29,15 +29,46 @@ const citiesList = {
     "New York": 349727,
 };
 
-console.log(citiesList.hasOwnProperty("Lviv"))
 
 const getWeather = document.getElementById('get_weather');
 
 // констнанта объекта для HTTP Requests
 const xhttp = new XMLHttpRequest();
 
-// функуия отправки запроса, получения ответа - и разобрать ответ в элементы на HTTP странице 
-// теперь тут
+function formatDate(date) {
+    const yyyy = date.getFullYear();
+    let mm = date.getMonth() + 1; // Months start at 0!
+    let dd = date.getDate();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    return dd + '/' + mm + '/' + yyyy;
+}
+
+function fToC(F) {
+    return Math.round((5/9) * (F - 32)) + ' \xB0C.';
+}
+
+function getImage(flag) {
+    const img = flag ? 'storm' : 'sun';
+
+    return ` <img src="img/${img}.jpg" class="icon" alt="">`;
+}
+
+function buildHtml(daysData) {
+
+    const unixTimeZero = new Date(daysData.Date);
+
+    return `<div class="weather">
+            <h2>${formatDate(unixTimeZero)}</h2>
+            <div id="day">${fToC(daysData.Temperature.Maximum.Value)} / ${getImage(daysData.Day.HasPrecipitation)}</div> 
+            <div id="night">${fToC(daysData.Temperature.Minimum.Value)} / ${getImage(daysData.Night.HasPrecipitation)} </div>
+        </div>`;
+}
+
+const resultDiv = document.getElementById('weather_result');
+
 function getWeatherData() {
     const inputCity = document.getElementById('city').value;
 
@@ -50,8 +81,15 @@ function getWeatherData() {
             if(this.readyState === 4 && this.status === 200) {
                 
                 const data = JSON.parse(this.response);
-                console.log(data);
-                // TODO::  разложить данные в HTML
+                
+                resultDiv.innerHTML = '';
+
+                data.DailyForecasts.forEach(function(day) {
+                    // теперь через аппенд добавляем содержимое в наш результирующий див
+                    const dayHtml = buildHtml(day);
+
+                    resultDiv.innerHTML += dayHtml;
+                })
 
             } else {
                 console.log(JSON.parse(this.response));
@@ -61,13 +99,9 @@ function getWeatherData() {
         }
  
     } else {
-     console.log('ERROR!')  
-
-    }
- 
- 
-     console.log(inputCity.value)
-    
+     console.log('ERROR!');
+     resultDiv.innerHTML = '<h1>Error: City is Not Valid</h1>';
+    }    
 }
 
 getWeather.addEventListener('click', getWeatherData)
