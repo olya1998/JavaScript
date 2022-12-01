@@ -13,7 +13,49 @@ const button = document.getElementById('search');
 const result = document.getElementById('result');
 const ApiKey = '6d4f5f8a';
 
-const baseUrl = `http://www.omdbapi.com/?apikey=${ApiKey}&s=`;
+const baseUrl = `http://www.omdbapi.com/?apikey=${ApiKey}&plot=full&s=`;  //
+
+const detailsUrl = `https://www.omdbapi.com/?apikey=${ApiKey}&i=`;
+
+
+// https://www.omdbapi.com/?i=tt7767422&apikey=6d4f5f8a
+// www.omdbapi.com - домен 
+// параметры: i, apikey
+// это для того чтобы ты разбиралась как их считывать и задавать - это будет очень часто использоваться - нужно шарить розумьем
+
+
+// функция создать элемент(фильм) списка 
+
+function getFilmHTML (film) {
+    return `
+        <div id="result">
+            <div class="film-list">
+                <h4 class="filmTitle"> ${film.Title}</h4>
+                <img src="${film.Poster}" width="300" alt="член импотента">
+                <button class="details" data-details="описание того как авокадинка отрезала член импотентику с отрезанными яйцами во рту- в качестве кляпа">Details</button>
+            </div>
+            <div class="separator"></div>
+        </div>`;
+}
+
+
+function addEvent(id) {
+    const btnDetails = document.getElementsByClassName('details');  // Collection of objects
+
+    console.log(btnDetails);
+    for (let i = 0; i < btnDetails.length; i++) {
+        console.log(btnDetails[i].id); //second console output
+    }
+
+    // btnDetails.forEach((element) => {
+    //     element.addEventListener('click', function() {
+    //         console.log(this);
+    //     });
+    // });
+
+    // тут ещё один шаг нужен 
+   
+}
 
 
 button.addEventListener('click', function () {
@@ -33,16 +75,30 @@ button.addEventListener('click', function () {
             // давай для начала выведем результат поиска - список названий фильмов
 
             response.Search.forEach((film) => {
-                result.innerHTML += film.Title;
+                    // нам нужно найти как-то макет для отображения фильмов: название и подробнее ()
+
+
+                result.innerHTML += getFilmHTML(film);
+                
             }) // мы знаем что это массив - потому делаем цикл/ . каждый элемент в цикле -
             // будет в указанной переменной 
-
+            
 
          console.log(response);
         });
+        addEvent(23);
+
     });
 
 })
+
+// обработчик клика на Детальнее (такой же как выше - только там без цикла). нужно передать ID - взятый из списка film.imdbID
+// теперь делаем тут для вывода деталей по фильму 
+// мы знаем что для того, чтобы вывести детали по фильму - нужно передавать ID этого фильма в строке запроса
+// 1 сделаем обработчик 
+
+
+
 
 
 
