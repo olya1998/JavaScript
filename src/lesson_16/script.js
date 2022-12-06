@@ -1,29 +1,19 @@
-// Ознайомитись та опрацювати Promise.race, Promise.any, Promise.resolve/Promise.reject
 
-// Реалізувати веб-сторінку для пошуку фільмів.
-
-// На головній сторінці необхідно реалізувати форму для введення назви фільму/серіалу 
-
-
-
-
-// нужен обработчик событиия - клик на конпку 
 const input = document.getElementById('movie'); 
 const search = document.getElementById('search');
 const result = document.getElementById('result');
 const ApiKey = '6d4f5f8a';
+const perPage = 10;
+
+const maxPages = 15;
+
+const page = search.dataset.page;
 
 const baseUrl = `http://www.omdbapi.com/?apikey=${ApiKey}&plot=full&s=`;  //
 
 const detailsUrl = `https://www.omdbapi.com/?apikey=${ApiKey}&i=`;
 
 
-// https://www.omdbapi.com/?i=tt7767422&apikey=6d4f5f8a
-// www.omdbapi.com - домен 
-// параметры: i, apikey
-
-
-// функция создать элемент(фильм) списка 
 
 function getFilmHTML (film) {
     return `
@@ -67,11 +57,36 @@ function getDatails(id) {
     });
 }
 
+function buildPagination(totalPages, currentPage) {
+    let pagesHTML = '';
+    let pushed;
+
+    const pages = Math.ceil(totalPages / perPage);
+    for(let i = 1; i < pages && i <= maxPages; i++) {
+
+        pushed = currentPage == i ? 'pushed' : '';
+        pagesHTML += `<button class="${pushed}" onClick="setPage(${i})" class="paginator">${i}</button>`;
+    }
+
+    return pagesHTML;
+}
+
+function setPage(page) {
+    search.dataset.page = page;
+    search.click();
+}
+
 
 
 search.addEventListener('click', function () {
-    //при каждом нажатии на "искать" - удалять все результаты поиска - как это делает гугл 
-     const requests = fetch(baseUrl + input.value).then((res) => res.json());
+    const requestUrl = baseUrl + input.value; 
+    const page = this.dataset.page;
+
+    const requests = fetch(requestUrl  + `&page=${page}`).then((res) => res.json());
+
+    console.log(requestUrl  + `&page=${page}`);
+
+    result.innerHTML = '';
  
 
     Promise.all([requests])
@@ -83,6 +98,19 @@ search.addEventListener('click', function () {
                 result.innerHTML = `<h3> ${response.Error}</h3>`;
                 return;
             }
+
+          
+            if(response.totalResults > perPage) {
+                const pages = buildPagination(response.totalResults, page);
+
+                document.querySelectorAll('.pagination_div').forEach((paginanation) => {
+                    paginanation.innerHTML = pages;
+                })
+
+        
+                    
+            }
+
 
             response.Search.forEach((film) => {
                 result.innerHTML += getFilmHTML(film);
@@ -100,23 +128,3 @@ search.addEventListener('click', function () {
 
 })
 
-// обработчик клика на Детальнее (такой же как выше - только там без цикла). нужно передать ID - взятый из списка film.imdbID
-// нужно передавать ID этого фильма в строке запроса
-
-
-
-
-
-
-
-// Реалізувати кнопку Search та при кліку на яку необхідно відправити відповідний запит до API ресурсу OMDB (http://www.omdbapi.com/) за допомогою AJAX (fetch).
-
-// Результат необхідно розпарсити та відобразити нижче на сторінці. Якщо за заданими пошуком полес не знайдено фільмів, то з’являється повідомлення Movie not found
-
-// OMDB за замовчуванням повертає лише перші 10 фільмів. Тому необхідно реалізувати пагінацію
-
-// Біля кожного фільму повинна бути кнопка Details, натискання на яку виводитиме детальну інформацію про фільм. Цю інформацію необхідно виводити на цій же сторінці одразу під списком знайдених фільмів і пагінацією.
-
-// Всі запити необхідно відправляти за допомогою AJAX. Тобто при натисканні на будь-які кнопки веб-сторінка не повинна оновлюватися.
-
-// Посилання на API OMDB: http://www.omdbapi.com/ (необхідно зареєструватися для отримання API KEY).
