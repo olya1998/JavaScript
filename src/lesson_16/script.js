@@ -1,4 +1,3 @@
-
 const input = document.getElementById('movie'); 
 const search = document.getElementById('search');
 const result = document.getElementById('result');
@@ -9,11 +8,9 @@ const maxPages = 15;
 
 const page = search.dataset.page;
 
-const baseUrl = `http://www.omdbapi.com/?apikey=${ApiKey}&plot=full&s=`;  //
+const baseUrl = `http://www.omdbapi.com/?apikey=${ApiKey}&plot=full&s=`;
 
 const detailsUrl = `https://www.omdbapi.com/?apikey=${ApiKey}&i=`;
-
-
 
 function getFilmHTML (film) {
     return `
@@ -21,7 +18,7 @@ function getFilmHTML (film) {
             <div class="film-list film_line">
                 <h4 class="filmTitle"> ${film.Title}</h4>
                 <img src="${film.Poster}" width="200" alt="">
-                <button class="details" id="${film.imdbID}" onclick="getDatails('${film.imdbID}')">Datails</button>
+                <button class="details" id="${film.imdbID}" onclick="getDatails('${film.imdbID}')">Details</button>
             </div>
             <div class="film_line" id="film_details_${film.imdbID}"></div>
             <div class="separator">
@@ -29,7 +26,6 @@ function getFilmHTML (film) {
             </div>
         </div>`;
 }
-
 
 function getFilmDetailsHTML (filmDetails) {
     return `
@@ -46,14 +42,11 @@ function getDatails(id) {
 
     Promise.all([requests])
     .then((responses) => {
-        const filmDetails = document.getElementById('film_details_' + id)
+        const filmDetails = document.getElementById('film_details_' + id);
 
          responses.forEach((response) => {
-            
             filmDetails.innerHTML = getFilmDetailsHTML(response);
-            
         });
-
     });
 }
 
@@ -76,19 +69,16 @@ function setPage(page) {
     search.click();
 }
 
-
-
 search.addEventListener('click', function () {
     const requestUrl = baseUrl + input.value; 
     const page = this.dataset.page;
 
-    const requests = fetch(requestUrl  + `&page=${page}`).then((res) => res.json());
+    const requests = fetch(requestUrl + `&page=${page}`).then((res) => res.json());
 
-    console.log(requestUrl  + `&page=${page}`);
+    console.log(requestUrl + `&page=${page}`);
 
     result.innerHTML = '';
  
-
     Promise.all([requests])
     .then((responses) => {
         
@@ -99,32 +89,24 @@ search.addEventListener('click', function () {
                 return;
             }
 
-          
             if(response.totalResults > perPage) {
                 const pages = buildPagination(response.totalResults, page);
 
                 document.querySelectorAll('.pagination_div').forEach((paginanation) => {
                     paginanation.innerHTML = pages;
-                })
-
-        
-                    
+                });       
             }
-
 
             response.Search.forEach((film) => {
                 result.innerHTML += getFilmHTML(film);
-            }) 
-           
+            });
         });
 
          document.querySelectorAll('.details').forEach((detailElement) => {
             detailElement.addEventListener('click', function () {
                 getDatails(this.id);
-             })
-         })
-
+             });
+         });
     });
-
-})
+});
 
