@@ -1,0 +1,48 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #87CEFA;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#movie {
+    font-size:15px;
+    margin-top: 25px;
+    margin-left: 30px;
+    font-weight:bold;
+    color:#00BFFF; 
+    width:  140px;
+    
+}
+
+#search {
+    background-color: #FFFF00;
+
+}
+.pushed{
+    background-color: #FFFF00;
+    margin-top: 20px;    
+}
+
+.result {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.separator {
+    margin-top: 30px;
+}
+
+.details {
+    background-color: #FFFF00;
+}
+
+.film_line {
+    color: #00008B;
+}
+
+
