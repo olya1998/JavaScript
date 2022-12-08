@@ -36,3 +36,13 @@ button:active {
 #error {
     color: #FF0000;
 }
+
+.cityLink {
+    display: inline-block;
+    width: 150px;
+}
+
+#caption{
+    font-size: 35px;
+    font-weight: bold;
+}

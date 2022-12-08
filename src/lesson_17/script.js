@@ -5,6 +5,9 @@
 const apiKey = '1dB5HAESsayMuxns9csvyV9lpA7Bhe5L';
 const baseURL = 'http://dataservice.accuweather.com';
 
+const inputCity = document.getElementById('city');
+//
+const cityName = document.getElementById('caption');
 
 
 function getWeatherURLI (cityKey) {
@@ -14,6 +17,11 @@ function getWeatherURLI (cityKey) {
 function getSearchrURI (city) {
     return baseURL + `/locations/v1/search?apikey=${apiKey}&q=${city}`;
 }
+
+function getNeighborsURI (cityKey) {
+    return baseURL + `/locations/v1/cities/neighbors/${cityKey}?apikey=${apiKey}`;
+}
+// /locations/v1/cities/neighbors/324561?apikey=1dB5HAESsayMuxns9csvyV9lpA7Bhe5L
 
 const citiesList = {
     'Lviv': 324561,
@@ -31,7 +39,8 @@ const citiesList = {
 };
 
 const getWeather = document.getElementById('get_weather');
-
+//
+const neighborsDiv = document.getElementById('neighbors');
 const xhttp = new XMLHttpRequest();
 
 function formatDate(date) {
@@ -58,39 +67,115 @@ function renderHtml(daysData) {
 
     return `<div class="weather">
             <h2>${formatDate(unixTimeZero)}</h2>
-            <div id="day">${fToC(daysData.Temperature.Maximum.Value)} / ${getImage(daysData.Day.HasPrecipitation)}</div> 
-            <div id="night">${fToC(daysData.Temperature.Minimum.Value)} / ${getImage(daysData.Night.HasPrecipitation)}</div>
+            <div id="day">${convertFToC(daysData.Temperature.Maximum.Value)} / ${getImage(daysData.Day.HasPrecipitation)}</div> 
+            <div id="night">${convertFToC(daysData.Temperature.Minimum.Value)} / ${getImage(daysData.Night.HasPrecipitation)}</div>
         </div>`;
+}
+
+//searchCity
+
+function searchCity(cityName) {
+    console.log(cityName);
+    // наверно лучше не сам ключ, а название города передавать
+    // чтобы потом по названию искать 
+    // так не очень оптимально - но мельше гемороя 
+// меняем значение в строке поиска
+inputCity.value = cityName;
+
+getWeatherData();
+
+
+}
+
+function getNeighborCityLink(cityObject) {
+    return `<div class="cityLink">
+        <h2></h2>
+        <button class="cityButton" onClick="searchCity('${cityObject.LocalizedName}')" class="paginator">${cityObject.LocalizedName}</button> 
+    </div>`;
 }
 
 const resultDiv = document.getElementById('weather_result');
 
 async function getWeatherData() {
-    const inputCity = document.getElementById('city').value;
+    //const inputCity = document.getElementById('city').value;
+    //чистим старые результаты
+
+
 
     // делаем запрос к серверу - ищем такой город
-    const cityResult = await fetch(getSearchrURI(inputCity))
+    const cityResult = await fetch(getSearchrURI(inputCity.value))
     .then((response) => response.json())
     .catch((error) => {
         console.error('Error:', error);
     });
 
-    if(cityResult.length > 2) {
-        console.log('Error')
-    }
-
-    console.log(cityResult[0].Key);
-    return;
-
 
     //если не находим - сообщение об ошибке
+    if(!cityResult.length) {
+        console.log('Error')
+        // вывести сообщение что такого города нет - пользователю - какой-то див с этим текстом
+        return;  // это прекращает дальнейшее выволнение функции
+    }
+
+    cityName.innerHTML = `Weather in ${cityResult[0].LocalizedName} for nex 5 days`;
+
+    const searchCityKey = cityResult[0].Key;
 
     //если находим - делаем второй запрос на соседние города 
+    const neighborsResult = await fetch(getNeighborsURI(searchCityKey))
+    .then((response) => response.json())
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+     console.log(neighborsResult);
+    // return;
+
+    
+
+
+
+    // делаем запрос прогоды по этому городу
+    const weatherResult = await fetch(getWeatherURLI(searchCityKey))
+    .then((response) => response.json())
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+   
+
 
     // отрисовываем погоду по этому городу 
+    resultDiv.innerHTML = '';
+
+    await weatherResult.DailyForecasts.forEach(function(day) {
+        const dayHtml = renderHtml(day);
+
+        resultDiv.innerHTML += dayHtml;
+    });
 
     // и создаём кнопки - соседние города 
+    //getNeighborCityLink
 
+    //если не находим соседей - в области, где должны быть ссылки на другие города - надпись - соседей не нашли
+    if(neighborsResult.length) {
+
+        neighborsDiv.innerHTML = '';
+
+        await neighborsResult.forEach(function(neighborsCity) {
+            const cityHtml = getNeighborCityLink(neighborsCity);
+
+            neighborsDiv.innerHTML += cityHtml;
+        });
+
+    } else {
+        console.log('Error:  no neighbors');
+        // вывести сообщение соседей не нашли - какой-то див с этим текстом
+        // продолжаем выполнение, так как это не меняет основного функционала 
+    }
+
+   
+
+    return ;
     // обработчик клика на этот город - подставляется значение в строку поиска и все шаги повторяются 
 
     if(citiesList.hasOwnProperty(inputCity)) {
