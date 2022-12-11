@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+}
+
+div {
+    margin: 30px;
+}
+
+#city {
+    font-size: 15px;
+    height: 40px; 
+    margin: 30px;
+    color: #7B68EE;
+}
+
+#get_weather {
+    height: 24px; 
+    color: blue;
+}
+
+button:focus,
+button:active {
+  border-color: #FFFF00;
+}
+
+.weather {
+    display: inline-block;
+    width: 150px;
+}
+
+.icon {
+    vertical-align: text-bottom;
+    width: 25px;
+}
+
+h3 {
+    color: #FF0000;
+}
+#error {
+    color: #FF0000;
+}
+
+.cityLink {
+    display: inline-block;
+    width: 150px;
+}
+
+#caption{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.cityLink {
+    margin-top: 20px;
+}
+
+.cityButton {
+    height: 24px; 
+    color: blue;
+} 
