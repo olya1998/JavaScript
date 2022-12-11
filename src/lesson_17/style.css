@@ -33,6 +33,9 @@ button:active {
     width: 25px;
 }
 
+h3 {
+    color: #FF0000;
+}
 #error {
     color: #FF0000;
 }
@@ -46,3 +49,12 @@ button:active {
     font-size: 35px;
     font-weight: bold;
 }
+
+.cityLink {
+    margin-top: 20px;
+}
+
+.cityButton {
+    height: 24px; 
+    color: blue;
+} 
