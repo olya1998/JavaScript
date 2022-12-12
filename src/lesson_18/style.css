@@ -38,7 +38,12 @@ body {
 }
 
 .details {
+    margin-top: 20px;
     background-color: #FFFF00;
+}
+
+h4 {
+    margin: 20px;
 }
 
 .film_line {

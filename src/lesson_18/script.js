@@ -1,18 +1,3 @@
-// За основу взяти ДЗ 16. Promises. Fetch API
-
-// Всі fetch операції переписати використавши axios бібліотеку
-
-// Замінити всі .then() (якщо є в коді) на async/await
-
-// Покращити стилізацію
-
-// Покращити пагінацію, якщо це можливо та є час
-
-// Максимально покращити код (деструктуризація, ф-ії, стрілочні ф-ії, однострічкові ф-ії з неявним return тощо)
-
-// import axios from 'axios'; // we do not undersatnd this yet
-
-
 const input = document.getElementById('movie'); 
 const search = document.getElementById('search');
 const result = document.getElementById('result');
@@ -37,7 +22,7 @@ const getFilmHTML = (film) => {
             <div class="film_line" id="film_details_${film.imdbID}"></div>
         </div>
         <hr>`;
-}
+};
 
 const getFilmDetailsHTML = (filmDetails) => {
     return `
@@ -47,10 +32,9 @@ const getFilmDetailsHTML = (filmDetails) => {
             </div>
             <div class="separator"></div>
         </div>`;
-}
+};
 
 const getDetails = async (id) => {
-
     try {
         let details = await axios.get(detailsUrl + id);
         details = details.data;
@@ -60,9 +44,8 @@ const getDetails = async (id) => {
 
     } catch (error) {
         console.log(error);
-    }
-      
-}
+    }  
+};
 
  const buildPagination = (totalPages, currentPage) => {
     let pagesHTML = '';
@@ -76,12 +59,12 @@ const getDetails = async (id) => {
     }
 
     return pagesHTML;
-}
+};
 
 const setPage = (page) => {
     search.dataset.page = page;
     search.click();
-}
+};
 
 const searchFilm = async (e) => {
     const that = e.target;
@@ -117,9 +100,8 @@ const searchFilm = async (e) => {
         }
 
         getDetails(this.id);
-    });
-         
-}
+    });     
+};
 
 search.addEventListener('click', searchFilm);
 
